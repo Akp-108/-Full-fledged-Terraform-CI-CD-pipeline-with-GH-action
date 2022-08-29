@@ -1,7 +1,7 @@
 name: show a full fledged Terraform CI/CD pipeline with GH action
 
 env:
-  working-directory: ../main/Example
+  working-directory: ./atul/Example
 
 
 on:
