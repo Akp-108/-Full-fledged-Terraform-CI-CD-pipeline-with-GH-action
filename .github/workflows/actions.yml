@@ -63,10 +63,10 @@ jobs:
         working-directory: ${{env.working-directry}}
         # working-directory: "./main/Example"
 
-      - name: Terraform destroy
-        id: destroy
-        run: terraform destroy -auto-approve
-        working-directory: ${{env.working-directry}}
+      # - name: Terraform destroy
+      #   id: destroy
+      #   run: terraform destroy -auto-approve
+      #   working-directory: ${{env.working-directry}}
         # working-directory: "./main/Example"
 
 # full-fledged-Terraform-CI-CD-pipeline-with-GH-action
