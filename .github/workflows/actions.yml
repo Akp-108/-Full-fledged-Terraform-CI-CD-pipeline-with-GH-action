@@ -23,14 +23,14 @@ jobs:
       AWS_DEFAULT_REGION: us-east-1
       
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Run a one-line script
         run: echo this is one line
 
-      - name: Setup Terraform  
-      - uses: hashicorp/setup-terraform@v1
+  
+      
+      - uses: hashicorp/setup-terraform@v2  
 
       - name: Terraform fmt
         id: fmt
