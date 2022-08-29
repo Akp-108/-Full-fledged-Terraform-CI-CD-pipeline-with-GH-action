@@ -7,6 +7,6 @@ module "user" {
   
 module "my-buck" {
   source = "../../s3"
-  for_each = var.buck_loop  
+  for_each =  var.buck_loop  
   bucket_name = each.value
 }
