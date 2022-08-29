@@ -1,7 +1,7 @@
 name: show a full fledged Terraform CI/CD pipeline with GH action
 
-# env:
-#   working-directory: ./main/module
+env:
+  working-directory: ./main/Example
 
 
 on:
@@ -37,20 +37,20 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
-        # working-directory: ${{env.working-directry}}
-        working-directory: "./main/Example"
+        working-directory: ${{env.working-directry}}
+        # working-directory: "./main/Example"
 
       - name: Terraform Validate
         id: validate
         run: terraform validate 
-        # working-directory: ${{env.working-directry}}
-        working-directory: "./main/Example"
+        working-directory: ${{env.working-directry}}
+        # working-directory: "./main/Example"
 
       - name: Terraform Plan
         id: plan
         run: terraform plan 
-        # working-directory: ${{env.working-directry}}
-        working-directory: "./main/Example"
+        working-directory: ${{env.working-directry}}
+        # working-directory: "./main/Example"
       
       - name: Terrafom Plan status
         if: steps.plan.outcome == 'failure'
@@ -60,13 +60,13 @@ jobs:
         id: apply
         if: steps.plan.outcome != 'failure'
         run: terraform apply -auto-approve
-        # working-directory: ${{env.working-directry}}
-        working-directory: "./main/Example"
+        working-directory: ${{env.working-directry}}
+        # working-directory: "./main/Example"
 
       - name: Terraform destroy
         id: destroy
         run: terraform destroy -auto-approve
-        # working-directory: ${{env.working-directry}}
-        working-directory: "./main/Example"
+        working-directory: ${{env.working-directry}}
+        # working-directory: "./main/Example"
 
 # full-fledged-Terraform-CI-CD-pipeline-with-GH-action
