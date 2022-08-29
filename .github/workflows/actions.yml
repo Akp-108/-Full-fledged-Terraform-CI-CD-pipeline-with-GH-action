@@ -25,12 +25,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run a one-line script
-        run: echo this is one line
-
-  
-      
-      - uses: hashicorp/setup-terraform@v1  
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2 
 
       - name: Terraform fmt
         id: fmt
