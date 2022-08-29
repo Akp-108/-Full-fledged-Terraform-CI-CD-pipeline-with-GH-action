@@ -1,117 +1,69 @@
-# name: show a full fledged Terraform CI/CD pipeline with GH action
+name: show a full fledged Terraform CI/CD pipeline with GH action
 
-# env:
-#   working-directory: ./atul/Example
-
-
-# on:
-#   push:   
-#     branches: ["main", "master"]
-#   pull_request: 
-#     branches: ["main", "master"]
-
-#   workflow_dispatch:  
+env:
+  working-directory: ./atul/Example
 
 
-# jobs:
-#   pipeline:
-#     runs-on: ubuntu-latest
-    # env:
-    #   AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID }}
-    #   AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-    #   AWS_SESSION_TOKEN: ${{secrets.AWS_SESSION_TOKEN}}
-    #   AWS_DEFAULT_REGION: us-east-1
-#       working_folder: ./atul/Example
-#     steps:
-#       - uses: actions/checkout@v3
+on:
+  push:   
+    branches: ["main", "master"]
+  pull_request: 
+    branches: ["main", "master"]
 
-#       - name: Run a one-line script
-#         run: echo this is one line
+  workflow_dispatch:  
 
-        
-#       - uses: actions/checkout@v2
-#       - uses: hashicorp/setup-terraform@v2  
 
-#       - name: Terraform fmt
-#         id: fmt
-#         run: terraform fmt 
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      AWS_SESSION_TOKEN: ${{secrets.AWS_SESSION_TOKEN}}
+      AWS_DEFAULT_REGION: us-east-1
       
-#       - name: Terraform Init
-#         id: init
-#         run: terraform init
-#         # working-directory: ${{env.working-directry}}
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v3
 
-#       - name: Terraform Validate
-#         id: validate
-#         run: terraform validate 
-#         # working-directory: ${{env.working-directry}}
+      - name: Run a one-line script
+        run: echo this is one line
 
-#       - name: Terraform Plan
-#         id: plan
-#         run: terraform plan
-#         # working-directory: ${{env.working-directory}}
+      - name: Setup Terraform  
+      - uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt 
       
-#       - name: Terrafom Plan status
-#         if: steps.plan.outcome == 'failure'
-#         run: echo somthing error place check the code once!!!!!!
+      - name: Terraform Init
+        id: init
+        run: terraform init
+        working-directory: ${{env.working-directry}}
 
-#       - name: Terraform apply
-#         id: apply
-#         if: steps.plan.outcome != 'failure'
-#         run: terraform apply -auto-approve
-#         # working-directory: ${{env.working-directry}}
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate 
+        working-directory: ${{env.working-directry}}
 
-#       - name: Terraform destroy
-#         id: destroy
-#         run: terraform destroy -auto-approve
-#         # working-directory: ${{env.working-directry}}
-
-
-# name: Terraform actions
-
-# on:
-#  push: 
-#   branches: ["main","master"]
-
-#  workflow_dispatch:
-
-# jobs:
-#   terraform:
-#     name: 'Terraform'
-#     runs-on: ubuntu-latest
- 
-#     env:
-#       AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID }}
-#       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-#       AWS_SESSION_TOKEN: ${{secrets.AWS_SESSION_TOKEN}}
-#       AWS_DEFAULT_REGION: us-east-1
-#       working_folder: ./atul/Example
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan
+        working-directory: ${{env.working-directory}}
       
-#     defaults:
-#       run:
-#         working-directory: ${{ env.working_folder }}
+      - name: Terrafom Plan status
+        if: steps.plan.outcome == 'failure'
+        run: echo somthing error place check the code once!!!!!!
 
-#     steps:
-#     - name: Checkout
-#       uses: actions/checkout@v3
+      - name: Terraform apply
+        id: apply
+        if: steps.plan.outcome != 'failure'
+        run: terraform apply -auto-approve
+        working-directory: ${{env.working-directry}}
 
-#     - name: Setup Terraform
-#       uses: hashicorp/setup-terraform@v1
-     
-#     - name: Terraform Init
-#       run: terraform init
-
-#     - name: Terraform Validate
-#       run: terraform validate
-
-#     - name: Terraform Plan
-#       run: terraform plan 
-      
-#     - name: Terraform Apply
-#       run: terraform apply -auto-approve 
-
-#     - name: Terraform Destroy
-#       run: terraform destroy -auto-approve 
-
+      - name: Terraform destroy
+        id: destroy
+        run: terraform destroy -auto-approve
+        working-directory: ${{env.working-directry}}
 
 
