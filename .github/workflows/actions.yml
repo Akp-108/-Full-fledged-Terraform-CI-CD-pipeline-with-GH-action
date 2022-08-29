@@ -30,7 +30,7 @@ jobs:
 
   
       
-      - uses: hashicorp/setup-terraform@v2  
+      - uses: hashicorp/setup-terraform@v1  
 
       - name: Terraform fmt
         id: fmt
