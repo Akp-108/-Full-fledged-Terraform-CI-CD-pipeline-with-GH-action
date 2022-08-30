@@ -10,3 +10,12 @@ module "my-buck" {
   for_each =  var.buck_loop  
   bucket_name = each.value
 }
+
+
+terraform {
+  backend "s3" {
+    bucket = "ci-cd-destroy30082022"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+  }
+}

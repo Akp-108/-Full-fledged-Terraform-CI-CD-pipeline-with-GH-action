@@ -1,4 +1,4 @@
-name: Github Actions to destroy Terraform resources
+name: Terraform-Destroy
 
 env:
   working-directory: ./atul/Example
@@ -6,31 +6,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  destroy_resources:
+
+  terraform:
+    name: 'Deletion'
     runs-on: ubuntu-latest
-
     env:
-      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-      AWS_SESSION_TOKEN: ${{secrets.AWS_SESSION_TOKEN}}
-      AWS_DEFAULT_REGION: us-east-1
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
 
-    steps: 
-      - uses: actions/checkout@v3
+    steps:
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        
-      - name: Terraform init
-        id: init
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Terraform Init
         run: terraform init
         working-directory: ${{env.working-directory}}
 
-      - name: Terraform destroy
-        id: destroy
+      - name: Terraform Destroy
         run: terraform destroy -auto-approve
         working-directory: ${{env.working-directory}}
-
 
 
 
